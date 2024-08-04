@@ -24,13 +24,16 @@ class CarManager:
 
     def move_cars(self):
         for car in COLORS:
-            if self.cars[COLORS.index(car)].xcor() > - 240:
+            if self.cars[COLORS.index(car)].xcor() > - 280:
                 random_move = random.randint(2, 8)
                 # self.cars[COLORS.index(car)].forward(10 * random_move)
                 self.cars[COLORS.index(car)].goto(y=STARTING_POSITIONS[COLORS.index(car)], x=self.cars[COLORS.index(car)].xcor() - random_move)
-
+            else:
+                self.cars[COLORS.index(car)].setpos(x=280, y=STARTING_POSITIONS[COLORS.index(car)])
         return
 
+    def cars_reset(self):
+        pass
 
 
 
