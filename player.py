@@ -21,3 +21,4 @@ class Player(Turtle):
 
     def reset_player(self):
         self.setpos(x=0, y=-280)
+
