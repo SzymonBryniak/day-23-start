@@ -10,7 +10,6 @@ class CarManager:
 
     def __init__(self):
         self.cars = []
-        self.create_cars()
 
     def create_cars(self):
         for color in COLORS:
@@ -33,21 +32,27 @@ class CarManager:
             car.color(COLORS[random_value])
             car.shapesize(stretch_len=2)
             car.setpos(x=320, y=STARTING_POSITIONS[random_value])
+        return random_range
+    # I need to keep spawning more cars asynchronously to the cars already moving
 
     def move_cars(self):
         random_car = random.randint(0, 5)
         for car in COLORS:
+            # I will probably call "add_car" here.
             if self.cars[COLORS.index(car)].xcor() > - 280:
                 random_move = random.randint(2, 15)
                 # self.cars[COLORS.index(car)].forward(10 * random_move)
                 self.cars[COLORS.index(car)].goto(y=STARTING_POSITIONS[COLORS.index(car)], x=self.cars[COLORS.index(car)].xcor() - random_move)
             else:
-                # self.cars[COLORS.index(car)].setpos(x=280, y=STARTING_POSITIONS[COLORS.index(car)])
-                self.cars[random_car].setpos(x=280, y=STARTING_POSITIONS[COLORS.index(car)])
+                self.cars[COLORS.index(car)].setpos(x=280, y=STARTING_POSITIONS[COLORS.index(car)])
         return
 
-    def cars_reset(self):
-        pass
+    def add_car(self):
+        if car[-1].xcor < 260:
+              # I will spawn additional cars in positions excluding the position of the last car or in the position of the last car if the
+            # xcor of the last car is beyond a predefined minimum coordinate away from the spawn of the new car.
+        return
+
 
 
 
