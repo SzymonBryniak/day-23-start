@@ -10,10 +10,8 @@ screen.setup(width=600, height=600)
 screen.tracer(0)
 player = Player()
 cars = CarManager()
-
-screen.tracer(0)
-
 scoreboard.display_score()
+
 game_is_on = True
 while game_is_on:
     screen.listen()
@@ -21,7 +19,7 @@ while game_is_on:
     time.sleep(0.1)
     screen.update()
     cars.move_cars()
-    for i in range(0, 6):
+    for i in range(0, 6):  # to adjust range to cover additional cars
         if player.distance(cars.cars[i]) < 25 and player.xcor():
             print('game over')
             scoreboard.update_score(-1)
