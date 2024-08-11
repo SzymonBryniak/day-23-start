@@ -1,10 +1,10 @@
+import time
 from turtle import Turtle
 import random
 COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
 STARTING_MOVE_DISTANCE = 5
 MOVE_INCREMENT = 10
-STARTING_POSITIONS = [-240, -125, -140, -40, 60, 160, 260]
-RANDOM_VALUE = random.randint(0, 5)
+STARTING_POSITIONS = [-240, -200, -140, -80, -40, 0, 60, 90, 120, 160, 210, 260]
 
 
 class CarManager:
@@ -25,28 +25,41 @@ class CarManager:
             self.cars.append(car)
 
     def create_car(self):
-        random_value = random.randint(0, 5)
+        random_color = random.randint(0, len(COLORS)-1)
+        random_position = random.randint(0, len(STARTING_POSITIONS)-1)
         car = Turtle()
         car.penup()
         car.shape('square')
-        car.color(COLORS[random_value])
+        car.color(COLORS[random_color])
         car.shapesize(stretch_len=2)
-        car.setpos(x=320, y=STARTING_POSITIONS[random_value])
+        car.setpos(x=320, y=STARTING_POSITIONS[random_position])
         self.cars.append(car)
 
+    def check_space(self):
+
+        pass
+
     def move_cars(self):
-        random_position = random.randint(0, 5)
-        self.create_car()
+        end_range = len(self.cars)
+        print(end_range)
         for car in range(0, len(self.cars)):
-            # I will probably call "add_car" here.
+            print(f'3 : {len(self.cars)}')
+            print(self.cars[car].xcor())
+            # self.delete_car(car)
             if self.cars[car].xcor() > -280:
                 random_move = random.randint(2, 15)
-                # self.cars[COLORS.index(car)].forward(10 * random_move)
                 self.cars[car].goto(y=self.cars[car].ycor(), x=self.cars[car].xcor() - random_move)
-            else:
-                self.cars[car].setpos(x=280, y=self.cars[car].ycor())
+            # else:
+                # self.cars[car].setpos(x=280, y=self.cars[car].ycor())
 
-        return
+        return self.create_car()
+
+    def delete_car(self, car):
+        # for car in range(0, len(self.cars)):
+        print(f'from move cats iterator : {car}')
+        if self.cars[car].xcor() <= -290:
+            self.cars.pop(car)
+            print(f'len : {len(self.cars)}')
 
     # def add_car(self, number_of_cars):
     #     self.create_car()
@@ -57,7 +70,7 @@ class CarManager:
     #     for car in range(0 , cars):
     #         if player.distance(cars.cars[i]) < 25 and player.xcor():
     #             continue
-    #     if self.cars[
+    #
     #     if self.cars[-1].xcor < 260:
     #         car = Turtle()
     #         car.penup()

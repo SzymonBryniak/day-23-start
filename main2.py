@@ -16,10 +16,10 @@ game_is_on = True
 while game_is_on:
     screen.listen()
     screen.onkeypress(player.go_up, key='Up')
-    time.sleep(0.1)
+    time.sleep(0.09)
     screen.update()
     cars.move_cars()
-    for i in range(0, 6):  # to adjust range to cover additional cars
+    for i in range(0, len(cars.cars)):  # to adjust range to cover additional cars
         if player.distance(cars.cars[i]) < 25 and player.xcor():
             print('game over')
             scoreboard.update_score(-1)
