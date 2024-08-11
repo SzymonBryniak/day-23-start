@@ -12,6 +12,8 @@ class CarManager:
     def __init__(self):
         self.cars = []
         self.create_cars()
+        self.cars_at_end = 0
+        self.car_count = 6
 
     def create_cars(self):
         for color in COLORS:
@@ -25,6 +27,7 @@ class CarManager:
             self.cars.append(car)
 
     def create_car(self):
+        self.car_count += 1
         random_color = random.randint(0, len(COLORS)-1)
         random_position = random.randint(0, len(STARTING_POSITIONS)-1)
         car = Turtle()
@@ -41,17 +44,20 @@ class CarManager:
 
     def move_cars(self):
         end_range = len(self.cars)
-        print(end_range)
-        for car in range(0, len(self.cars)):
-            print(f'3 : {len(self.cars)}')
-            print(self.cars[car].xcor())
+        # print(end_range)
+        for car in range(0, self.car_count):
+            # print(f'3 : {len(self.cars)}')
+            # print(self.cars[car].xcor())
             # self.delete_car(car)
             if self.cars[car].xcor() > -280:
                 random_move = random.randint(2, 15)
                 self.cars[car].goto(y=self.cars[car].ycor(), x=self.cars[car].xcor() - random_move)
-            # else:
+            else:
+                self.cars_at_end += 1
                 # self.cars[car].setpos(x=280, y=self.cars[car].ycor())
-
+                # del self.cars[car]
+                # self.car_count -= 1
+                print(f'car count : {self.car_count}')
         return self.create_car()
 
     def delete_car(self, car):
