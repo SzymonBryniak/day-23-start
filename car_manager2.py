@@ -11,6 +11,7 @@ class CarManager:
 
     def __init__(self):
         self.cars = []
+
         self.create_cars()
         self.cars_at_end = 0
         self.car_count = 6
@@ -27,16 +28,18 @@ class CarManager:
             self.cars.append(car)
 
     def create_car(self):
-        self.car_count += 1
-        random_color = random.randint(0, len(COLORS)-1)
-        random_position = random.randint(0, len(STARTING_POSITIONS)-1)
-        car = Turtle()
-        car.penup()
-        car.shape('square')
-        car.color(COLORS[random_color])
-        car.shapesize(stretch_len=2)
-        car.setpos(x=320, y=STARTING_POSITIONS[random_position])
-        self.cars.append(car)
+        if self.car_count < 70:
+            self.car_count += 1
+            print(f'cars total {self.car_count}')
+            random_color = random.randint(0, len(COLORS)-1)
+            random_position = random.randint(0, len(STARTING_POSITIONS)-1)
+            car = Turtle()
+            car.penup()
+            car.shape('square')
+            car.color(COLORS[random_color])
+            car.shapesize(stretch_len=2)
+            car.setpos(x=320, y=STARTING_POSITIONS[random_position])
+            self.cars.append(car)
 
     def check_space(self):
 
@@ -46,6 +49,7 @@ class CarManager:
         end_range = len(self.cars)
         # print(end_range)
         for car in range(0, self.car_count):
+            print(f'iterator :{car}, actual list length: {len(self.cars)}')
             # print(f'3 : {len(self.cars)}')
             # print(self.cars[car].xcor())
             # self.delete_car(car)
@@ -53,40 +57,20 @@ class CarManager:
                 random_move = random.randint(2, 15)
                 self.cars[car].goto(y=self.cars[car].ycor(), x=self.cars[car].xcor() - random_move)
             else:
+                print(f'car reached xcor : {self.cars[car].xcor()}')
+
                 self.cars_at_end += 1
-                # self.cars[car].setpos(x=280, y=self.cars[car].ycor())
                 # del self.cars[car]
                 # self.car_count -= 1
-                print(f'car count : {self.car_count}')
-        return self.create_car()
+                self.cars[car].setpos(x=280, y=self.cars[car].ycor())
+                # del self.cars[car]
+                # self.car_count -= 1
+                # self.delete_car(self.cars[car])
+                # print(f'car count : {self.car_count}')
 
-    def delete_car(self, car):
-        # for car in range(0, len(self.cars)):
-        print(f'from move cats iterator : {car}')
-        if self.cars[car].xcor() <= -290:
-            self.cars.pop(car)
-            print(f'len : {len(self.cars)}')
+        self.create_car()
+        return
 
-    # def add_car(self, number_of_cars):
-    #     self.create_car()
-    #     random_value = random.randint(0, 5)
-    #     random_postion = STARTING_POSITIONS[random_value]
-    #     starting_position = 0
-    #     cars = len(self.cars)
-    #     for car in range(0 , cars):
-    #         if player.distance(cars.cars[i]) < 25 and player.xcor():
-    #             continue
-    #
-    #     if self.cars[-1].xcor < 260:
-    #         car = Turtle()
-    #         car.penup()
-    #         car.shape('square')
-    #         car.color(COLORS[random_value])
-    #         car.shapesize(stretch_len=2)
-    #         car.setpos(x=320, y=starting_position)
-    #           # I will spawn additional cars in predefined positions excluding the position of the last car or in the position of the last car if the
-    #         # xcor of the last car is beyond a predefined minimum coordinate away from the spawn of the new car.
-    #     return
 
 
 
